@@ -11,8 +11,8 @@ def get_contacts():
 @app.route("/create_quest", methods=["POST"])
 def create_quest():
     goal = request.json.get("goal")
-    deadline = request.get("deadline")
-    description = request.get("description")
+    deadline = request.json.get("deadline")
+    description = request.json.get("description")
 
     if not goal or not deadline or not description:
         return (
@@ -29,7 +29,7 @@ def create_quest():
     
     return jsonify({"message": "Quest created!"}), 201
 
-@app.route("/update_quest/<int:user_id", methods=["PATCH"])
+@app.route("/update_quest/<int:user_id>", methods=["PATCH"])
 def update_quest(user_id):
     quest = Quest.query.get(user_id)
 
